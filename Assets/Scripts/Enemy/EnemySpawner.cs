@@ -10,39 +10,44 @@ public class EnemySpawner : MonoBehaviour
     List<Transform> children = new List<Transform>();
     public float spawnTimer;
     public float spawnInterval = 10f;
-    public GameObject enemyPrefab;
-    
+    public GameObject enemyPrefab;   
     public GameObject yo;
-
     int spawnPointMaxIndex = 8;
 
-
+  
     // Use this for initialization
     void Start()
     {
-        spawnPoints = GameObject.FindGameObjectWithTag("SpawnPoint");
-        yo = GameObject.Find("[Group] SpawnPoints");
 
-        yo.GetComponentsInChildren<Transform>();
-
-        foreach (Transform sp in spawnPoints.transform)
+        if (SceneManager.GetActiveScene().name != "Menu")
         {
-            children.Add(sp.transform);
+            gameObject.SetActive(true);
+            spawnPoints = GameObject.FindGameObjectWithTag("SpawnPoint");
+            yo = GameObject.Find("[Group] SpawnPoints");
+            yo.GetComponentsInChildren<Transform>();
+
+            foreach (Transform sp in spawnPoints.transform)
+            {
+                children.Add(sp.transform);
+            }
+
         }
-       
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Scene test = SceneManager.GetActiveScene(); // Store current scene
-        Scene test1 = SceneManager.GetSceneByName("Menu"); // store menu scene
-        if (test == test1) // If current scene is the menu
-        {
-            gameObject.SetActive(false); // Disable UI / conflicting statements
-        }
 
-        spawnTimer += Time.deltaTime;
+
+        if (SceneManager.GetActiveScene().name != "Menu")
+        {
+              spawnTimer += Time.deltaTime;
 
         if(spawnTimer > spawnInterval)
         {
@@ -62,6 +67,9 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnInterval = 10f;
         }
+        }
+
+      
 
     }
 }

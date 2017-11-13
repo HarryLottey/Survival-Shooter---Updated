@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SpawnPlayer : MonoBehaviour
 {
+    int menu = 0;
     int local = 1;
     int networked = 2;
     int sceneIndex;
-    
+
+    bool activeOnLoad;
+
     [SerializeField]
     GameObject localPlayer;
     [SerializeField]
@@ -16,34 +19,32 @@ public class SpawnPlayer : MonoBehaviour
 
     Transform localspawnPos;
 
-    private void Awake()
-    {
-
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        GameObject refr = GameObject.FindGameObjectWithTag("LocalSpawn");
-        localspawnPos = refr.transform;
-    }
+    
 
     // Use this for initialization
     void Start()
     {
-        
 
-        if(sceneIndex == local)
+        if (SceneManager.GetActiveScene().name != "Menu")
         {
-            Instantiate(localPlayer, localspawnPos);
+            gameObject.SetActive(true);
+            GameObject refr = GameObject.FindGameObjectWithTag("LocalSpawn");
+            localspawnPos = refr.transform;
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
 
-        else if (sceneIndex == networked)
+
+        if (SceneManager.GetActiveScene().name == "Local")
+            {
+                Instantiate(localPlayer, localspawnPos);
+            }
+            else if (SceneManager.GetActiveScene().name == "Networked")
         {
-            Instantiate(networkedPlayer, localspawnPos);
-        }        
-    }
-
-    private void Update()
-    {
-        gameObject.SetActive(true);
-    }
-
+                Instantiate(networkedPlayer, localspawnPos);
+            }
+        }
 }
+

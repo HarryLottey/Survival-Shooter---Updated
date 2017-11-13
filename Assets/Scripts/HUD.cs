@@ -15,6 +15,7 @@ public class HUD : MonoBehaviour
     public Texture2D healthBar;
     public Texture2D rIcon;
     Texture2D bulletTexture;
+    Texture2D bulletTexture2;
     public int rows = 4;
     public float ammoY, ammoX, ammoSpacing, ammoSpacingY, ammoSizeY, ammoSizeX; // Positioning of icons
 
@@ -25,76 +26,96 @@ public class HUD : MonoBehaviour
     bool showReload;
 
 
+    
+   
+
     // Use this for initialization
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        indexRef = player.GetComponentInParent<WeaponSystem>();
-        revolverIcon = Resources.Load("Icons/RevolverIcon") as Texture2D;
-        crossbowIcon = Resources.Load("Icons/CrossbowIcon") as Texture2D;
-        eIcon = Resources.Load("Icons/Eicon") as Texture2D;
-        qIcon = Resources.Load("Icons/Qicon") as Texture2D;
-        rIcon = Resources.Load("Icons/Ricon") as Texture2D;
-        gradientIcon = Resources.Load("Icons/GradientIcon") as Texture2D;
 
-        
+
+
+        if (SceneManager.GetActiveScene().name != "Menu")
+        {
+            gameObject.SetActive(true);
+            player = GameObject.FindGameObjectWithTag("Player");
+            //indexRef = player.GetComponentInParent<WeaponSystem>();
+            revolverIcon = Resources.Load("Icons/RevolverIcon") as Texture2D;
+            crossbowIcon = Resources.Load("Icons/CrossbowIcon") as Texture2D;
+            eIcon = Resources.Load("Icons/Eicon") as Texture2D;
+            qIcon = Resources.Load("Icons/Qicon") as Texture2D;
+            rIcon = Resources.Load("Icons/Ricon") as Texture2D;
+            gradientIcon = Resources.Load("Icons/GradientIcon") as Texture2D;
+            bulletTexture = Resources.Load("Icons/Bullet") as Texture2D;
+            bulletTexture2 = Resources.Load("Icons/Bolt") as Texture2D;
+
+        }
+        else if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            gameObject.SetActive(false);
+        }
+
+
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Scene test = SceneManager.GetActiveScene(); // Store current scene
-        Scene test1 = SceneManager.GetSceneByName("Menu"); // store menu scene
-        if (test == test1) // If current scene is the menu
-        {
-            gameObject.SetActive(false); // Disable UI / conflicting statements
-        }
 
-        if (indexRef != null)
+       
+
+        if (SceneManager.GetActiveScene().name != "Menu")
         {
-            if (indexRef.currentAmmo <= 0)
+            Scene test = SceneManager.GetActiveScene(); // Store current scene
+            Scene test1 = SceneManager.GetSceneByName("Menu"); // store menu scene
+
+            if (test == test1) // If current scene is the menu
             {
-                showReload = true;
+                gameObject.SetActive(false); // Disable UI / conflicting statements
+            }
+
+            if (indexRef != null)
+            {
+                if (indexRef.currentAmmo <= 0)
+                {
+                    showReload = true;
+                }
+                else
+                {
+                    showReload = false;
+                }
+            }
+
+
+
+            if (indexRef != null)
+            {
+                if (indexRef.weaponIndex == 0)
+                {
+                    // NOTE(Manny): This should be loaded at start ONLY
+
+                }
+                else if (indexRef.weaponIndex == 1)
+                {
+
+                }
+            }
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, 1 << LayerMask.NameToLayer("Interactable")))
+            {
+                showInteractable = true;
             }
             else
             {
-                showReload = false;
+                showInteractable = false;
             }
+
         }
 
-        string denied;
-
-        denied = SceneManager.GetSceneByName("Menu").ToString();
-
-        if (SceneManager.GetActiveScene().name == denied)
-        {
-            Debug.Log(denied);
-        }
-
-        if (indexRef != null)
-        {
-            if (indexRef.weaponIndex == 0)
-            {
-                // NOTE(Manny): This should be loaded at start ONLY
-                bulletTexture = Resources.Load("Icons/Bullet") as Texture2D;
-            }
-            else if (indexRef.weaponIndex == 1)
-            {
-                bulletTexture = Resources.Load("Icons/Bolt") as Texture2D;
-            }
-        }
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, 1 << LayerMask.NameToLayer("Interactable")))
-        {
-            showInteractable = true;
-        }
-        else
-        {
-            showInteractable = false;
-        }
 
     }
 
@@ -102,6 +123,8 @@ public class HUD : MonoBehaviour
 
     void OnGUI()
     {
+
+
         float scrW = Screen.width / 16;
         float scrH = Screen.height / 9;
 

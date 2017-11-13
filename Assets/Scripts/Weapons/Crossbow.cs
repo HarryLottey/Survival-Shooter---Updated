@@ -35,7 +35,7 @@ public class Crossbow : Weapon
         if (ammo > 0)
         {
             ammo--;
-            Instantiate(boltPrefab, projectileOrigin.transform.position, transform.localRotation);                           
+                                    
         }
 
     }
