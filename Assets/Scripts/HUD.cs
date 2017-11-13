@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
@@ -50,13 +51,16 @@ public class HUD : MonoBehaviour
             gameObject.SetActive(false); // Disable UI / conflicting statements
         }
 
-        if (indexRef.currentAmmo <= 0)
+        if (indexRef != null)
         {
-            showReload = true;
-        }
-        else
-        {
-            showReload = false;
+            if (indexRef.currentAmmo <= 0)
+            {
+                showReload = true;
+            }
+            else
+            {
+                showReload = false;
+            }
         }
 
         string denied;
@@ -68,13 +72,17 @@ public class HUD : MonoBehaviour
             Debug.Log(denied);
         }
 
-        if (indexRef.weaponIndex == 0)
+        if (indexRef != null)
         {
-            bulletTexture = Resources.Load("Icons/Bullet") as Texture2D;
-        }
-        else if (indexRef.weaponIndex == 1)
-        {
-            bulletTexture = Resources.Load("Icons/Bolt") as Texture2D;
+            if (indexRef.weaponIndex == 0)
+            {
+                // NOTE(Manny): This should be loaded at start ONLY
+                bulletTexture = Resources.Load("Icons/Bullet") as Texture2D;
+            }
+            else if (indexRef.weaponIndex == 1)
+            {
+                bulletTexture = Resources.Load("Icons/Bolt") as Texture2D;
+            }
         }
 
         RaycastHit hit;
@@ -94,33 +102,40 @@ public class HUD : MonoBehaviour
 
     void OnGUI()
     {
-        
-
         float scrW = Screen.width / 16;
         float scrH = Screen.height / 9;
 
 
+        Profiler.BeginSample("Draw Texture");
         for (int x = 0; x < rows; x++) // Row
         {
             for (int y = 0; y < 10; y++) // Column
             {
-                GUI.DrawTexture(new Rect(ammoX * scrW + (y * (ammoSpacing * scrW)), ammoY * scrH + (x * (ammoSpacingY * scrH)), ammoSizeX * scrW, ammoSizeY * scrH), bulletTexture);
+              //  GUI.DrawTexture(new Rect(ammoX * scrW + (y * (ammoSpacing * scrW)), ammoY * scrH + (x * (ammoSpacingY * scrH)), ammoSizeX * scrW, ammoSizeY * scrH), bulletTexture);
             }
             // Row * 10
         }
-        // is our editable bullet clip
-        for (int i = 0; i < indexRef.currentAmmo; i++)
+        Profiler.EndSample();
+
+        Profiler.BeginSample("Load Image");
+        if (indexRef != null)
         {
-            // Draw a texture that moves one across for every bullet we have, and moves down with the addition of each new row
-            GUI.DrawTexture(new Rect(ammoX * scrW + (i * (ammoSpacing * scrW)), ammoY * scrH + (rows * (ammoSpacingY * scrH)), ammoSizeX * scrW, ammoSizeY * scrH), bulletTexture);
+            // is our editable bullet clip
+            for (int i = 0; i < indexRef.currentAmmo; i++)
+            {
+                // Draw a texture that moves one across for every bullet we have, and moves down with the addition of each new row
+                GUI.DrawTexture(new Rect(ammoX * scrW + (i * (ammoSpacing * scrW)), ammoY * scrH + (rows * (ammoSpacingY * scrH)), ammoSizeX * scrW, ammoSizeY * scrH), bulletTexture);
+            }
         }
+        Profiler.EndSample();
 
-
+        Profiler.BeginSample("Shows Reload");
         if (showReload)
         {
             GUI.DrawTexture(new Rect(8 * scrW, 4 * scrH, 1.5f * scrW, 1f * scrH), rIcon);
             GUI.Label(new Rect(8.5f * scrW, 5f * scrH, 1.3f * scrW, 1f * scrH), "Reload");
         }
+        Profiler.EndSample();
 
         GUI.DrawTexture(new Rect(13*scrW, 8*scrH, 1.5f*scrW, 1f*scrH), qIcon);
 
@@ -129,12 +144,14 @@ public class HUD : MonoBehaviour
             GUI.DrawTexture(new Rect(8 * scrW, 4 * scrH, 1.5f * scrW, 1f * scrH), eIcon);
             GUI.Label(new Rect(8.5f * scrW, 5f * scrH, 1.3f * scrW, 1f * scrH), "Use");
         }
-        
-        if(indexRef.weaponIndex == 0)
-        GUI.DrawTexture(new Rect(14 * scrW, 8 * scrH, 2 * scrW, 1 * scrH), revolverIcon);
 
-        if(indexRef.weaponIndex == 1)
-            GUI.DrawTexture(new Rect(14 * scrW, 8 * scrH, 2 * scrW, 1 * scrH), crossbowIcon);
+        if (indexRef != null)
+        {
+            if (indexRef.weaponIndex == 0)
+                GUI.DrawTexture(new Rect(14 * scrW, 8 * scrH, 2 * scrW, 1 * scrH), revolverIcon);
 
+            if (indexRef.weaponIndex == 1)
+                GUI.DrawTexture(new Rect(14 * scrW, 8 * scrH, 2 * scrW, 1 * scrH), crossbowIcon);
+        }
     }
 }
