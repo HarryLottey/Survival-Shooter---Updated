@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     public float mouseSensitivity = 10f;
 
+    private bool jump = false;
+
     void Start()
     {
         playerEyes = GameObject.FindGameObjectWithTag("Eyes");
@@ -38,6 +40,13 @@ public class PlayerController : MonoBehaviour
         // Apply movement
         moveDirection = transform.rotation * moveDirection; // Rotate locally
         moveDirection *= movementSpeed;
+
+        if(jump)
+        {
+            moveDirection.y = jumpSpeed;
+            jump = false;
+        }
+
         moveDirection.y -= gravity * Time.deltaTime;
         
         charMovement.Move(moveDirection * Time.deltaTime);
@@ -49,10 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         if (charMovement.isGrounded)
         {
-            if (j == true)
-            {
-                moveDirection.y = jumpSpeed;
-            }
+            jump = j;
         }
     }
 
