@@ -1,0 +1,58 @@
+Mono path[0] = 'C:/Users/harison.lottey/Source/Repos/Survival-Shooter---Updated/Builds/Test_Data/Managed'
+Mono path[1] = 'C:/Users/harison.lottey/Source/Repos/Survival-Shooter---Updated/Builds/Test_Data/Mono'
+Mono config path = 'C:/Users/harison.lottey/Source/Repos/Survival-Shooter---Updated/Builds/Test_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/harison.lottey/Source/Repos/Survival-Shooter---Updated/Builds/Test_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55388
+Multi-casting "[IP] 172.27.12.124 [Port] 55388 [Flags] 2 [Guid] 2042546740 [EditorId] 3433326313 [Version] 1048832 [Id] WindowsPlayer(600900J211DE411) [Debug] 0" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55388]
+PlayerConnection already initialized - listening to [0.0.0.0:55388]
+Initialize engine version: 5.5.0f3 (38b4efef76f0)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA Quadro K2200  (ID=0x13ba)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   10.18.13.5887
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\ProBuilderCore-Unity5.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\ProBuilderCore-Unity5.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\ProBuilderMeshOps-Unity5.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\ProBuilderMeshOps-Unity5.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\KdTreeLib.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\KdTreeLib.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\pb_Stl.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\pb_Stl.dll into Unity Child Domain
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\Poly2Tri.dll (this message is harmless)
+Loading C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\Poly2Tri.dll into Unity Child Domain
+- Completed reload, in  0.029 seconds
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\harison.lottey\Source\Repos\Survival-Shooter---Updated\Builds\Test_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 3.602929 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: e71c -> priority: 1 
+  Thread -> id: e76c -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.314591 ms
+System memory in use before: 148.3 MB.
+System memory in use after: 148.1 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2151.
+Total: 0.972319 ms (FindLiveObjects: 0.098253 ms CreateObjectMapping: 0.064300 ms MarkObjects: 0.321201 ms  DeleteObjects: 0.488262 ms)
+
