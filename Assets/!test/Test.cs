@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour {
+public abstract class Test : MonoBehaviour {
+    public float checkDelay = 0f;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private float checkTimer = 0f;
+
+    void Update()
+    {
+        Simulate();
+
+        checkTimer += Time.deltaTime;
+        if(checkTimer >= checkDelay)
+        {
+            Check();
+            checkTimer = 0f;
+        }
+    }
+
+    protected virtual void Simulate() { }
+    protected abstract void Check();
 }

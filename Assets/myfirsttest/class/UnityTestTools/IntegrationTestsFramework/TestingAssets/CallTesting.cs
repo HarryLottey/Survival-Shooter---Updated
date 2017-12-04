@@ -34,6 +34,7 @@ namespace UnityTest
             OnCollisionEnter2D,
             OnCollisionExit2D,
             OnCollisionStay2D,
+            CheckFire,
         }
 
         public enum Method
@@ -199,6 +200,11 @@ namespace UnityTest
         public void OnCollisionStay2D()
         {
             TryToCallTesting(Functions.OnCollisionStay2D);
+        }
+
+        public void CheckFire()
+        {
+            TryToCallTesting(Functions.CheckFire);
         }
     }
 }

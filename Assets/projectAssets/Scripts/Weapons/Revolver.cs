@@ -8,6 +8,7 @@ public class Revolver : Weapon
     [SerializeField]
     Camera cam;
 
+    
     public float blessDuration = 30f;
     public float timer;
     Light glow;
@@ -18,6 +19,7 @@ public class Revolver : Weapon
     // Use this for initialization
     void Awake()
     {
+        
         glow = gameObject.GetComponentInChildren<Light>();
         cam = Camera.main;
         if(attackable != 1 << LayerMask.NameToLayer("enemy")) // 1 << 8
@@ -48,17 +50,17 @@ public class Revolver : Weapon
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * fireDistance);
+        if(Camera.main != null)
+            Gizmos.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * fireDistance);
     }
 
     public override void Reload()
     {
-        if (Input.GetKeyDown(KeyCode.R) || ammo < 0 || Input.GetButtonDown("gReload"))
-        { // Manual reload, or when we are out of ammo
+      
             StartCoroutine(RevolveReload());
             if (ammo == maxAmmo)
                 StopCoroutine(RevolveReload());
-        }
+        
         
     }
 

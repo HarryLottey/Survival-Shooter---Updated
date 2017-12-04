@@ -11,6 +11,7 @@ public class UserController : MonoBehaviour
     public GameObject gameMasterReference;
     InGamePauseMenu pauseboi;
     SurvivalSystem endGameMovement;
+    Weapon currentwep;
 
     // Keyboard
     float kH; 
@@ -23,6 +24,7 @@ public class UserController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
 
         gameMasterReference = GameObject.FindGameObjectWithTag("GM");
         playerInput = GetComponentInChildren<PlayerController>();
@@ -75,7 +77,35 @@ public class UserController : MonoBehaviour
 
 
         }
-        
+
+        bool isCyclingWeapon = Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("gSwap");
+        if(isCyclingWeapon)
+        {
+            // Cycke weapon here
+            WeaponSystem cycle = gameObject.GetComponent<WeaponSystem>();
+            cycle.WeaponSwitching();
+        }
+
+        // IF user pressed down space
+        if (Input.GetButtonDown("Fire1") || Input.GetAxisRaw("cFire1") > 0)
+        {
+            Weapon currentWeapon = gameObject.GetComponent<Weapon>();
+            Weapon[] equippedWeapons = gameObject.GetComponents<Weapon>();
+            WeaponSystem weaponIndex = gameObject.GetComponent<WeaponSystem>();
+            
+            currentWeapon = equippedWeapons[weaponIndex.weaponIndex];
+            currentWeapon.Fire(weaponIndex.weaponIndex);
+
+        }
+
+        /*
+        if (Input.GetKeyDown(KeyCode.R) || ammo < 0 || Input.GetButtonDown("gReload"))
+        { // Manual reload, or when we are out of ammo
+            StartCoroutine(RevolveReload());
+            if (ammo == maxAmmo)
+                StopCoroutine(RevolveReload());
+        }
+        */
 
     }
 }

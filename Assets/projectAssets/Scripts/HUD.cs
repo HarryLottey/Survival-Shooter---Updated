@@ -104,7 +104,7 @@ public class HUD : MonoBehaviour
             }
 
             RaycastHit hit;
-
+/*
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, 1 << LayerMask.NameToLayer("Interactable")))
             {
                 showInteractable = true;
@@ -113,7 +113,7 @@ public class HUD : MonoBehaviour
             {
                 showInteractable = false;
             }
-
+            */
         }
 
 

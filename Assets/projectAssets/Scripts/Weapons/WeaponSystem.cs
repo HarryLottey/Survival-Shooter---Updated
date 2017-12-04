@@ -10,13 +10,12 @@ public class WeaponSystem : MonoBehaviour
     Weapon currentWeapon;
     public int currentAmmo;
     
-
-
-
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+
         equippedWeapons = GetComponentsInChildren<Weapon>(true);
+        currentAmmo = equippedWeapons[weaponIndex].ammo;
     }
 
     // Update is called once per frame
@@ -28,30 +27,23 @@ public class WeaponSystem : MonoBehaviour
     }
 
     // Check if a weapon is firing, and make sure the suitable fire function is ran
-    void CheckFire()
+  public  void CheckFire()
     {
         // Set current weapon to the weapon that correlates with index number from heirarcy order
         currentWeapon = equippedWeapons[weaponIndex];
-        // IF user pressed down space
-        if (Input.GetButtonDown("Fire1") || Input.GetAxisRaw("cFire1") > 0)
-        {
-            Debug.Log(Input.GetAxisRaw("cFire1").ToString());
-            // Fire currentWeapon
-            currentWeapon.Fire(currentWeapon.fireInterval);
-        }
+        currentWeapon.Fire(weaponIndex);
+        currentWeapon.ammo -= 1;
+        
     }
 
     #region Weapon Switching
     // Handles weapon switching
-    void WeaponSwitching()
+    public void WeaponSwitching()
     {
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("gSwap"))
-        {
-            CycleWeapon(-1);
-        }
+        StartCoroutine(CycleWeaponDelay());
     }
     // Cycles throuhg weapons using amount as an index for selected weapon.
-    void CycleWeapon(int amount)
+    public void CycleWeapon(int amount)
     {
         // SET desired index to weaponIndex + amount
         int desiredIndex = weaponIndex + amount;
@@ -102,6 +94,8 @@ public class WeaponSystem : MonoBehaviour
         // Return selected weapon
         return equippedWeapons[weaponIndex];
 
+
+
         #endregion
 
 
@@ -109,7 +103,13 @@ public class WeaponSystem : MonoBehaviour
 
     }
 
-    
+    IEnumerator CycleWeaponDelay()
+    {
+        yield return new WaitForSeconds(3);
+        CycleWeapon(-1);
+        
+    }
+
 
 }
 
@@ -122,7 +122,7 @@ public abstract class Weapon : MonoBehaviour
     public int maxAmmo = 6;
     public float reloadSpeed = 5f;
     public float fireInterval = 0.2f;
-    
+
 
 
     public abstract void Fire(float x);
